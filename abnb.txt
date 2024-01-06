@@ -1,0 +1,17 @@
+
+rehalat_mo2tamarat:
+
+start date
+end date
+price
+name
+max_persons
+year
+
+
+persons_rehlat_hgozat:
+person_id
+rehla_mo2tamar_id
+paid
+
+

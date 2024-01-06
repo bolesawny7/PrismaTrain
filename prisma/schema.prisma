@@ -1,0 +1,42 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model tbl_person_fixed_data {
+  person_code       Int             @id
+  person_first_name String
+  Event_Persons     event_persons[]
+}
+
+model event {
+  event_id      Int             @id @default(autoincrement())
+  start_date    DateTime
+  end_date      DateTime
+  price         Int
+  name          String
+  max_persons   Int
+  year          Int
+  Event_Persons event_persons[]
+}
+
+model event_persons {
+  event    event @relation(fields: [event_id], references: [event_id])
+  event_id Int
+
+  person      tbl_person_fixed_data @relation(fields: [person_code], references: [person_code])
+  person_code Int
+
+  amount_paid Int
+  is_paid     Int
+  date_paid   DateTime
+
+  @@id([event_id, person_code])
+}
